@@ -1,19 +1,51 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-10-26 16:00:40
- * @LastEditTime: 2020-10-26 16:02:07
+ * @LastEditTime: 2020-11-08 09:16:42
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\index.html
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
+    <style>
+        .wrapper {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border:10px solid #ccc;
+            border-right-color: transparent;
+            animation:loadingAnimation 0.75s infinite ;
+
+        }
+
+        .box {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        @keyframes loadingAnimation {
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="wrapper">
+        <div class="box"></div>
+    </div>
 </body>
+
 </html>
