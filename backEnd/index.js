@@ -1,7 +1,7 @@
 /*
  * @Author: 黄灿民
  * @Date: 2020-10-26 15:44:10
- * @LastEditTime: 2020-11-09 13:10:26
+ * @LastEditTime: 2020-11-09 20:32:56
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\backEnd\index.js
@@ -34,7 +34,7 @@ function createUserInfo() {
 router.post('/data', ctx => {
     // console.log(ctx.request.body);
     let user = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
         temp = createUserInfo();
         user.push(temp)
     }

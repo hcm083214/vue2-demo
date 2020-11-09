@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-11-08 09:44:53
- * @LastEditTime: 2020-11-09 14:04:15
+ * @LastEditTime: 2020-11-09 22:02:21
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\app\src\App.vue
@@ -12,6 +12,7 @@
     <refresh
       ref="refresh"
       @refreshEmit="refreshEmit"
+      @loadingEmit="loadingEmit"
     >
       <ul>
         <li v-for="item in mydata" :key="item.id">{{ item.name }}</li>
@@ -35,10 +36,11 @@ export default {
   },
   methods: {
     async refreshEmit() {
-      console.log("refreshEmit -> refreshEmit")
       return await this.getInitData();
     },
-    refreshEndEmit() {},
+    async loadingEmit() {
+      return await this.getLoadingData();
+    },
     async getInitData() {
       let result = await axios({
         baseURL: "/api",
@@ -51,9 +53,19 @@ export default {
       this.mydata.splice(0, this.mydata.length);
       this.mydata.push(...result.data.user);
     },
+    async getLoadingData() {
+      let result = await axios({
+        baseURL: "/api",
+        url: "/data",
+        method: "post",
+        data: {
+          page: 1,
+        },
+      });
+      this.mydata.push(...result.data.user);
+    },
   },
   async mounted() {
-    console.log("mounted -> mounted")
     await this.getInitData();
   },
 };
