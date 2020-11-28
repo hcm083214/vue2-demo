@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-10-26 16:00:40
- * @LastEditTime: 2020-11-27 14:33:27
+ * @LastEditTime: 2020-11-28 13:10:31
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\index.html
@@ -16,19 +16,25 @@
 </head>
 
 <body>
+
     <input type="file" name="" id="mfile">
+    <button id='btn'>上传</button>
+    <!-- <form action="http://localhost:8080/upload" method="post">
+        <input type="file" name="file" id="mfile2">
+        <button type="submit">上传</button>
+    </form>
+    <form action="http://localhost:8080/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="mfile3">
+        <button type="submit">上传</button>
+    </form> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         const mfile = document.querySelector('#mfile');
-        const form = new FormData()
-        mfile.addEventListener('input', fn)
-
-        function fn(e) {
-            console.log("🚀 ~ file: index.html ~ line 20 ~ mfile", mfile.files[0])
-            const file = mfile.files[0];
-            form.append('file',file)
-        }
+        const btn = document.querySelector('#btn')
+        const form = new FormData();
+        const url = 'http://localhost:8080/upload';
     </script>
+    <script src="./uploadPrimary.js"></script>
 </body>
 
 </html>
