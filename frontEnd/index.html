@@ -1,19 +1,64 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-10-26 16:00:40
- * @LastEditTime: 2020-10-26 16:02:07
+ * @LastEditTime: 2020-12-01 19:18:53
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\index.html
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
 </head>
+
 <body>
-    
+    <input type="file" name="" id="file" multiple>
+    <button class="btn">上传</button>
+    <script>
+        const file = document.querySelector('#file');
+        const btn = document.querySelector(".btn");
+        const url = 'http://localhost:3000/upload';
+        const SIZE = 10 * 1024;
+
+        btn.addEventListener('click', () => {
+            file.click();
+        })
+        file.addEventListener('change', handleChange);
+
+        function handleChange(e) {
+            const files = e.target.files;
+            console.log("🚀 ~ file: index.html ~ line 34 ~ handleChange ~ files", files)
+            // for(let i=0;;){
+
+            // }
+            files.slice()
+            const form = new FormData();
+            const uploadAsyncQueue = [];
+            [...files].forEach(file => {
+                form.append('file', file);
+                uploadAsyncQueue.push(uploadApi(form))
+            });
+            Promise.all(uploadAsyncQueue).then(res => {
+                console.log("🚀 ~ file: index.html ~ line 41 ~ Promise.all ~ res", res)
+            })
+        }
+
+        function uploadApi(form) {
+            return new Promise(resolve => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', url);
+                xhr.onload = function () {
+                    console.log("🚀 ~ file: index.html ~ line 43 ~ uploadApi ~ e", xhr.response)
+                    resolve(xhr.response)
+                }
+                xhr.send(form);
+            })
+        }
+    </script>
 </body>
+
 </html>
