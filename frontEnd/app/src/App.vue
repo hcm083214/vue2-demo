@@ -1,37 +1,41 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-11-28 14:43:03
- * @LastEditTime: 2020-11-28 15:42:25
+ * @LastEditTime: 2020-11-30 14:06:58
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\app\src\App.vue
 -->
 <template>
   <div id="app">
-    <input type="file" ref="file" />
-    <button class="btn" @click="uploadImg">提交</button>
-    <div v-if="imgPath"><img :src="imgPath" alt="" ></div>
+    <!-- <input type="file" ref="file" /> -->
+    <!-- <button class="btn" @click="uploadImg">提交</button> -->
+    <!-- <div><img src="./img/1606560629285_lena.jpg" alt=""></div> -->
+    <upload :multiple="true" action="/api/upload">
+      <button class="btn">上传</button>
+    </upload>
   </div>
 </template>
 
 <script>
-import { upload } from "@/server/index.js";
+import { uploadAxios } from "@/server/index.js";
+import Upload from "@/components/Upload.vue";
 export default {
   name: "App",
-  components: {},
+  components: { Upload },
   data() {
     return {
-      imgPath: null,
-    }
+      img: null,
+      imgUrl: "",
+    };
   },
   methods: {
     async uploadImg() {
       const file = this.$refs.file.files[0];
       const form = new FormData();
       form.append("file", file);
-      const result = await upload(form);
-      console.log("🚀 ~ file: App.vue ~ line 33 ~ uploadImg ~ result", result)
-      this.imgPath = result.data.imgPath
+      const result = await uploadAxios(form);
+      this.img = result.data;
     },
   },
 };
