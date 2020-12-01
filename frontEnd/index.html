@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-10-26 16:00:40
- * @LastEditTime: 2020-12-01 19:18:53
+ * @LastEditTime: 2020-12-01 19:39:53
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\index.html
@@ -31,20 +31,31 @@
 
         function handleChange(e) {
             const files = e.target.files;
-            console.log("🚀 ~ file: index.html ~ line 34 ~ handleChange ~ files", files)
-            // for(let i=0;;){
+            handleUpload(files);
+        }
 
-            // }
-            files.slice()
+        function handleUpload(files) {
             const form = new FormData();
-            const uploadAsyncQueue = [];
-            [...files].forEach(file => {
-                form.append('file', file);
-                uploadAsyncQueue.push(uploadApi(form))
-            });
+            const uploadAsyncQueue = createFileChunk(files);
+
             Promise.all(uploadAsyncQueue).then(res => {
                 console.log("🚀 ~ file: index.html ~ line 41 ~ Promise.all ~ res", res)
             })
+        }
+
+        function createFileChunk(files){
+            let uploadAsyncQueue = [];
+            [...files].forEach(file => {
+                const fileSize = file.size;
+                let curSize = 0;
+                while (curSize <= fileSize) {
+                    file.slice(curSize, curSize + SIZE)
+                    curSize += SIZE;
+                }
+                form.append('file', file);
+                uploadAsyncQueue.push(uploadApi(form))
+            });
+            return uploadAsyncQueue;
         }
 
         function uploadApi(form) {
