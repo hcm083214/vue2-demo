@@ -1,7 +1,7 @@
 /*
  * @Author: 黄灿民
  * @Date: 2020-10-26 15:44:10
- * @LastEditTime: 2020-12-02 23:03:50
+ * @LastEditTime: 2020-12-02 23:49:27
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\backEnd\index.js
@@ -38,7 +38,7 @@ router.post('/upload', ctx => {
     Promise.all(uploadCtrQuene).then(res => {
         console.log("🚀 ~ file: index.js ~ line 39 ~ Promise.all ~ res", res)
         //进行合并
-
+        
         //删除chunks文件夹
     })
     ctx.body = JSON.stringify({
