@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-11-28 20:42:27
- * @LastEditTime: 2020-12-01 09:34:35
+ * @LastEditTime: 2020-12-03 00:13:12
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\app\src\components\Upload.vue
@@ -23,7 +23,8 @@
     <ul class="upload-list" >
       <li v-for="(list,index) in uploadFinishList" :key="list.id">
         <span>{{ files[index].name }}</span> - <span>总大小：{{ list.processBar.total }}</span> -
-        <span>进度:{{ list.processBar.loaded }}</span>
+        <span>进度:{{ list.processBar.loaded }}</span>- <span>{{list.filesData[0].imgUrl}}</span> 
+        <img :src="list.filesData[0].imgUrl" alt="">
       </li>
     </ul>
   </div>

@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-11-28 14:43:03
- * @LastEditTime: 2020-11-30 14:06:58
+ * @LastEditTime: 2020-12-03 00:00:58
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\app\src\App.vue
@@ -10,7 +10,7 @@
   <div id="app">
     <!-- <input type="file" ref="file" /> -->
     <!-- <button class="btn" @click="uploadImg">提交</button> -->
-    <!-- <div><img src="./img/1606560629285_lena.jpg" alt=""></div> -->
+    <div><img src="./img/1606785635450_dog.da76812b.jpg" alt=""></div>
     <upload :multiple="true" action="/api/upload">
       <button class="btn">上传</button>
     </upload>

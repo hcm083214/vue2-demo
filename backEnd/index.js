@@ -1,13 +1,13 @@
 /*
  * @Author: 黄灿民
  * @Date: 2020-10-26 15:44:10
- * @LastEditTime: 2020-12-01 10:22:03
+ * @LastEditTime: 2020-12-03 00:13:27
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\backEnd\index.js
  */
 const Koa = require('koa');
-const serve = require("koa-static");
+// const serve = require("koa-static");
 const Router = require('koa-router');
 const Koabody = require('koa-body');
 const fs = require('fs');
@@ -115,7 +115,7 @@ function saveImg(newName, imgPath) {
     const uploadPath = path.resolve(__dirname, '../frontEnd/app/src/img', newName);
     const writeStream = fs.createWriteStream(uploadPath);
     readStream.pipe(writeStream);
-    return './img/' + newName;
+    return 'src/img/' + newName;
 }
 
 async function insertToDb({ title, from, newTime, imgUrl }) {
@@ -139,7 +139,7 @@ function createNewTime() {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
-app.use(serve(path.resolve(__dirname + "/img")))
+// app.use(serve(path.resolve(__dirname + "/img")))
 
 app.use(router.routes())
 app.listen(8080)
