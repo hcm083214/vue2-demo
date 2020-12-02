@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-10-26 16:00:40
- * @LastEditTime: 2020-12-01 19:39:53
+ * @LastEditTime: 2020-12-01 20:44:25
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\index.html
@@ -35,25 +35,28 @@
         }
 
         function handleUpload(files) {
-            const form = new FormData();
             const uploadAsyncQueue = createFileChunk(files);
-
             Promise.all(uploadAsyncQueue).then(res => {
                 console.log("🚀 ~ file: index.html ~ line 41 ~ Promise.all ~ res", res)
             })
         }
 
-        function createFileChunk(files){
+        function createFileChunk(files) {
+            const form = new FormData();
             let uploadAsyncQueue = [];
             [...files].forEach(file => {
+                console.log(file);
                 const fileSize = file.size;
                 let curSize = 0;
+                let index = 0;
                 while (curSize <= fileSize) {
-                    file.slice(curSize, curSize + SIZE)
+                    let end = (curSize + SIZE <= fileSize) ? curSize + SIZE : fileSize;
+                    index++;
+                    form.append(`file${index}`, file.slice(curSize, end));
+                    console.log("🚀 ~ file: index.html ~ line 55 ~ createFileChunk ~ file.slice(curSize, end)", file.slice(curSize, end))
+                    uploadAsyncQueue.push(uploadApi(form));
                     curSize += SIZE;
                 }
-                form.append('file', file);
-                uploadAsyncQueue.push(uploadApi(form))
             });
             return uploadAsyncQueue;
         }
@@ -63,7 +66,6 @@
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', url);
                 xhr.onload = function () {
-                    console.log("🚀 ~ file: index.html ~ line 43 ~ uploadApi ~ e", xhr.response)
                     resolve(xhr.response)
                 }
                 xhr.send(form);
