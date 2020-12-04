@@ -10,7 +10,7 @@
   <div id="app">
     <!-- <input type="file" ref="file" /> -->
     <!-- <button class="btn" @click="uploadImg">提交</button> -->
-    <div><img src="./img/1606785635450_dog.da76812b.jpg" alt=""></div>
+    <!-- <div><img src="./img/1606785635450_dog.da76812b.jpg" alt=""></div> -->
     <upload :multiple="true" action="/api/upload">
       <button class="btn">上传</button>
     </upload>

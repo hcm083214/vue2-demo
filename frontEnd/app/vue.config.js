@@ -1,7 +1,7 @@
 /*
  * @Author: 黄灿民
  * @Date: 2020-11-28 15:12:35
- * @LastEditTime: 2020-11-28 19:03:39
+ * @LastEditTime: 2020-12-04 15:08:11
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\app\vue.config.js
@@ -10,7 +10,7 @@ module.exports = {
     devServer: {
         proxy: {
             "/api": {
-                target: "http://localhost:8080",
+                target: "http://localhost:3000",
                 pathRewrite: { "^/api": "" }
             }
         }

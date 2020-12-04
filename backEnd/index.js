@@ -1,7 +1,7 @@
 /*
  * @Author: 黄灿民
  * @Date: 2020-10-26 15:44:10
- * @LastEditTime: 2020-12-03 00:13:27
+ * @LastEditTime: 2020-12-04 15:08:01
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\backEnd\index.js
@@ -142,4 +142,4 @@ function createNewTime() {
 // app.use(serve(path.resolve(__dirname + "/img")))
 
 app.use(router.routes())
-app.listen(8080)
+app.listen(3000)

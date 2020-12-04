@@ -1,7 +1,7 @@
 <!--
  * @Author: 黄灿民
  * @Date: 2020-11-28 20:42:27
- * @LastEditTime: 2020-12-03 00:13:12
+ * @LastEditTime: 2020-12-04 15:16:20
  * @LastEditors: 黄灿民
  * @Description: 
  * @FilePath: \00.test\frontEnd\app\src\components\Upload.vue
@@ -23,8 +23,9 @@
     <ul class="upload-list" >
       <li v-for="(list,index) in uploadFinishList" :key="list.id">
         <span>{{ files[index].name }}</span> - <span>总大小：{{ list.processBar.total }}</span> -
-        <span>进度:{{ list.processBar.loaded }}</span>- <span>{{list.filesData[0].imgUrl}}</span> 
-        <img :src="list.filesData[0].imgUrl" alt="">
+        <span>进度:{{ list.processBar.loaded }}</span>
+        <!-- - <span>{{list.filesData[0].imgUrl}}</span>  -->
+        <!-- <img :src="list.filesData[0].imgUrl" alt=""> -->
       </li>
     </ul>
   </div>
@@ -54,6 +55,8 @@ export default {
       //       processBar:{} //存储进度条信息
       //   }]
       processBarIsShow: false,
+      start:null,
+      timers:null,
     };
   },
   methods: {
@@ -65,6 +68,7 @@ export default {
       this.files = files;
       this.uploadFinishList = [];
       this.processBarIsShow = true;
+      this.start = Date.now();
       files.forEach((file, index) => {  //将需要上传的文件存放在formData
         const form = new FormData();
         form.append(`files`, file);
@@ -86,6 +90,10 @@ export default {
         this.progress,
         index
       );
+      this.timers = Date.now() - this.start;
+      console.log("🚀 ~ file: Upload.vue ~ line 94 ~ sendUpload ~ this.timers", this.timers)
+      console.log("🚀 ~ file: Upload.vue ~ line 94 ~ sendUpload ~ this.timers", result)
+
       if (this.uploadFinishList[index]) {
         this.$set(
           this.uploadFinishList[index],
